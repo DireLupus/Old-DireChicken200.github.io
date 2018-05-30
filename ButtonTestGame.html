@@ -17,7 +17,6 @@
   	padding: 15px;
   	}
   	div2 {
-  	
   	width: 770;
   	height: 250;
   	background: limegreen;
@@ -170,32 +169,32 @@ setInterval(drawGame, 100);
      	canvasContext.fillStyle = 'silver';
 	canvasContext.fillRect(playerX + 30, playerY, swordLength, swordWidth);
 	if(enemyX < playerX + 30 + swordLength && enemyX > playerX + 25 && enemyY == playerY) {
-	enemyX = canvas.width/2;
-	enemyY = 400;
+		enemyX = Math.floor(Math.random() * 100);
+		enemyY = Math.floor(Math.random() * 100);
 			counter += 1;
 	} // end if player hits enemy
 	} else 	if(directionToGo == 2) {	
      	canvasContext.fillStyle = 'silver';
 	canvasContext.fillRect(playerX - 25, playerY, swordLength, swordWidth);
 	if(enemyX + enemyW > playerX - 25 && enemyX < playerX && enemyY == playerY) {
-	enemyX = canvas.width/2;
-	enemyY = 400;
+		enemyX = Math.floor(Math.random() * 100);
+		enemyY = Math.floor(Math.random() * 100);
 			counter += 1;
 	} // end if player hits enemy
 	} else 	if(directionToGo == 3) {	
      	canvasContext.fillStyle = 'silver';
 	canvasContext.fillRect(playerX, playerY - 25, swordWidth, swordLength);
 	if(enemyY + enemyH > playerY - 25 && enemyY < playerY && enemyX == playerX) {
-	enemyX = canvas.width/2;
-	enemyY = 400;
+		enemyX = Math.floor(Math.random() * 100);
+		enemyY = Math.floor(Math.random() * 100);
 			counter += 1;
 	}
 	} else 	if(directionToGo == 4) {	
      	canvasContext.fillStyle = 'silver';
 	canvasContext.fillRect(playerX, playerY + 30, swordWidth, swordLength);
 	if(enemyY < playerY + 25 + swordWidth && enemyY > playerY + 25 && enemyX == playerX) {
-	enemyX = canvas.width/2;
-	enemyY = 400;
+		enemyX = Math.floor(Math.random() * 100);
+		enemyY = Math.floor(Math.random() * 100);
 		counter += 1;
 	} // end if player hits enemy
 	
@@ -211,8 +210,8 @@ canvasContext.arc(playerX + playerW/2, playerY + playerH/2, 75, 0, Math.PI*2, fa
 canvasContext.fill();   
 		if(enemyX > playerX + playerW/2 - 75 && enemyY > playerY + playerH/2 - 75) {
 		if(enemyX < playerX + playerW/2 + 75 && enemyY < playerY + (playerH/2) + 75) {
-		enemyX = canvas.width/2;
-		enemyY = 400;
+		enemyX = Math.floor(Math.random() * 100);
+		enemyY = Math.floor(Math.random() * 100);
 		counter += 1;
 		}
 		}
