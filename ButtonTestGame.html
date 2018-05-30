@@ -68,7 +68,7 @@ The rest is for you to figure out.
 <b>Good luck!</b>
 <br>
 <br>
-<b> SCORE </b>
+<b> SCORE (Hit attack to update score)</b>
 <br>
 <p id='score'></p>
 
@@ -96,10 +96,8 @@ const playerW = 25;
   		window.onload = function() {
 canvas = document.getElementById("gameCanvas");
 canvasContext = canvas.getContext('2d');
-
 console.log("I am Working!");
 setInterval(drawGame, 100);
-
 }
      	function doLoop() {
         	//put the value of the text box in a var called sayWhat
@@ -147,14 +145,13 @@ setInterval(drawGame, 100);
         	enemyY -= 2;
         	}
         	}
-
 		if(enemyX == playerX && enemyY == playerY) {
         	playerX = 20;
         	playerY = 20;
         	enemyX = canvas.width/2;
         	enemyY = 400;
+        	counter = 0;
         	}
-
      	console.log(playerX);
      	console.log(playerY);
      	}
@@ -212,7 +209,6 @@ canvasContext.fillStyle = 'orange';
 canvasContext.beginPath();
 canvasContext.arc(playerX + playerW/2, playerY + playerH/2, 75, 0, Math.PI*2, false);
 canvasContext.fill();   
-
 		if(enemyX > playerX + playerW/2 - 75 && enemyY > playerY + playerH/2 - 75) {
 		if(enemyX < playerX + playerW/2 + 75 && enemyY < playerY + (playerH/2) + 75) {
 		enemyX = canvas.width/2;
