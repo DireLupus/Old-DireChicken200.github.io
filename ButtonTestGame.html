@@ -1,0 +1,269 @@
+<DOCTYPE! html>
+
+<html>
+   <head>
+  	<title>RPG *ish* Game Thing</title>
+  	<style> 
+	body {
+	background-color: 996600;	
+	}  	
+  	
+  	div1 {
+  	
+  	width: 450;
+  	height: 250;
+  	background: green;
+  	float: right;
+  	padding: 15px;
+  	}
+  	div2 {
+  	
+  	width: 770;
+  	height: 250;
+  	background: limegreen;
+  	float: left;
+  	padding: 15px;
+  	}
+  	</style>
+   </head>
+   <body>
+  <canvas id="gameCanvas" width=800 height=600></canvas>
+  	<div1>
+  	<p>Name: <input id="sayThis" size=40> </p>
+
+  	<p>Move How Many Times <select id='howMany'>
+                        	<option value=1 selected>1</option>
+                        	<option value=2>2</option>
+                        	<option value=3>3</option>
+                        	<option value=4>4</option>
+                        	<option value=5>5</option>
+                   	  </select> </p>
+    <p>Up, Down, Left or Right <select id='direction'>
+                        	<option value=1 selected>Right</option>
+                        	<option value=2>Left</option>
+                        	<option value=3>Up</option>
+                        	<option value=4>Down</option>
+                   	  </select> </p>
+    <p>Weapon <select id='class'>
+                        	<option value=1 selected>Sword</option>
+                        	<option value=2>Staff</option>
+                   	  </select> </p>
+  	<p><button onClick='doLoop()'>Move</button></p>
+  	<p><button onClick='doAttack()'>Attack</button></p>
+</div1>
+
+<div2>
+<b>INSTRUCTIONS:</b>
+<br>
+<br>
+Play the game in a 1320 by 890 window. This allows the entire game to be seen.
+<br>
+<br>
+Move and attack by the panel on the right
+<br>
+<br>
+The rest is for you to figure out. 
+<br>
+<br>
+<b>Good luck!</b>
+<br>
+<br>
+<b> SCORE </b>
+<br>
+<p id='score'></p>
+
+</div2>
+ 
+
+  	<script>
+var canvas;
+var canvasContext;
+var counter = 0;
+var playerX = 20;
+var playerY = 20;
+var swordWidth = 10;
+var swordLength = 20;
+var fireBallR = 5;
+var daggerWidth = 5;
+var daggerLength = 15;
+var enemyX = 400;
+var enemyY = 500;
+var endScreen = -5;
+const enemyH = 25;
+const enemyW = 25;
+const playerH = 25;
+const playerW = 25; 	
+  		window.onload = function() {
+canvas = document.getElementById("gameCanvas");
+canvasContext = canvas.getContext('2d');
+
+console.log("I am Working!");
+setInterval(drawGame, 100);
+
+}
+     	function doLoop() {
+        	//put the value of the text box in a var called sayWhat
+        	var sayWhat = document.getElementById('sayThis').value;
+    	    //put the value of the dropdown box in a var called maxLoop
+        	var distanceToGo = document.getElementById('howMany').value;
+        	var  directionToGo = document.getElementById('direction').value;
+        	var str = ''; // where we'll store our output temporarily.
+        	
+        	if(directionToGo == 1) {
+        		for (var i = 1; (i <= distanceToGo * 5); i++) {   
+               	playerX += 4;
+        		} // end For statment
+        	} // end if go Right statement
+        	
+        	        	if(directionToGo == 2) {
+        		for (var i = 1; (i <= distanceToGo * 5); i++) {   
+               	playerX -= 4;
+        		} // end For statment
+        	} // end if go Left statement
+        	
+        	        	if(directionToGo == 3) {
+        		for (var i = 1; (i <= distanceToGo * 5); i++) {   
+               	playerY -= 4;
+        		} // end For statment
+        	} // end if go Up statement
+        	
+        	        	if(directionToGo == 4) {
+        		for (var i = 1; (i <= distanceToGo * 5); i++) {   
+               	playerY += 4;
+        		} // end For statment
+        	} // end if go Down statement
+        	
+        	for(var i = 1; (i <= distanceToGo * 5); i++) {
+        	if(enemyX < playerX) {
+        	enemyX += 2;
+        	}
+        	if(enemyY < playerY) {
+        	enemyY += 2;
+        	}
+        	if(enemyX > playerX) {
+        	enemyX -= 2;
+        	}
+        	if(enemyY > playerY) {
+        	enemyY -= 2;
+        	}
+        	}
+
+		if(enemyX == playerX && enemyY == playerY) {
+        	playerX = 20;
+        	playerY = 20;
+        	enemyX = canvas.width/2;
+        	enemyY = 400;
+        	}
+
+     	console.log(playerX);
+     	console.log(playerY);
+     	}
+     	function makeTrue() {
+     	attacking = true;
+     	}
+     	function makeFalse() {
+     	attacking = false;
+     	}
+     	function doAttack() {
+     	var  directionToGo = document.getElementById('direction').value;
+     	var damageType = document.getElementById('class').value;
+     	if(damageType == 1) {
+     	// Sword attacks
+     	if(directionToGo == 1) {	
+     	canvasContext.fillStyle = 'silver';
+	canvasContext.fillRect(playerX + 30, playerY, swordLength, swordWidth);
+	if(enemyX < playerX + 30 + swordLength && enemyX > playerX + 25 && enemyY == playerY) {
+	enemyX = canvas.width/2;
+	enemyY = 400;
+			counter += 1;
+	} // end if player hits enemy
+	} else 	if(directionToGo == 2) {	
+     	canvasContext.fillStyle = 'silver';
+	canvasContext.fillRect(playerX - 25, playerY, swordLength, swordWidth);
+	if(enemyX + enemyW > playerX - 25 && enemyX < playerX && enemyY == playerY) {
+	enemyX = canvas.width/2;
+	enemyY = 400;
+			counter += 1;
+	} // end if player hits enemy
+	} else 	if(directionToGo == 3) {	
+     	canvasContext.fillStyle = 'silver';
+	canvasContext.fillRect(playerX, playerY - 25, swordWidth, swordLength);
+	if(enemyY + enemyH > playerY - 25 && enemyY < playerY && enemyX == playerX) {
+	enemyX = canvas.width/2;
+	enemyY = 400;
+			counter += 1;
+	}
+	} else 	if(directionToGo == 4) {	
+     	canvasContext.fillStyle = 'silver';
+	canvasContext.fillRect(playerX, playerY + 30, swordWidth, swordLength);
+	if(enemyY < playerY + 25 + swordWidth && enemyY > playerY + 25 && enemyX == playerX) {
+	enemyX = canvas.width/2;
+	enemyY = 400;
+		counter += 1;
+	} // end if player hits enemy
+	
+	
+	}
+		
+		
+     	} else if(damageType == 2) {
+     	// Staff attacks
+canvasContext.fillStyle = 'orange';
+canvasContext.beginPath();
+canvasContext.arc(playerX + playerW/2, playerY + playerH/2, 75, 0, Math.PI*2, false);
+canvasContext.fill();   
+
+		if(enemyX > playerX + playerW/2 - 75 && enemyY > playerY + playerH/2 - 75) {
+		if(enemyX < playerX + playerW/2 + 75 && enemyY < playerY + (playerH/2) + 75) {
+		enemyX = canvas.width/2;
+		enemyY = 400;
+		counter += 1;
+		}
+		}
+		}	
+     	// } else if(damageType == 3) {
+//      	// Dagger attacks
+//      	    if(directionToGo == 1) {	
+//      	canvasContext.fillStyle = 'silver';
+// 	canvasContext.fillRect(playerX + 30, playerY + 5, daggerLength, daggerWidth);
+// 	canvasContext.fillRect(playerX + 30, playerY + 15, daggerLength, daggerWidth);
+// 	} else 	if(directionToGo == 2) {	
+//      	canvasContext.fillStyle = 'silver';
+// 	canvasContext.fillRect(playerX - 20, playerY + 5, daggerLength, daggerWidth);
+// 		canvasContext.fillRect(playerX - 20, playerY + 15, daggerLength, daggerWidth);
+// 	} else 	if(directionToGo == 3) {	
+//      	canvasContext.fillStyle = 'silver';
+// 	canvasContext.fillRect(playerX + 5, playerY - 20, daggerWidth, daggerLength);
+// 		canvasContext.fillRect(playerX + 15, playerY - 20, daggerWidth, daggerLength);
+// 	} else 	if(directionToGo == 4) {	
+//      	canvasContext.fillStyle = 'silver';
+// 	canvasContext.fillRect(playerX + 5, playerY + 30, daggerWidth, daggerLength);
+// 		canvasContext.fillRect(playerX + 15, playerY + 30, daggerWidth, daggerLength);
+// 	}  
+//      	}
+		document.getElementById("score").innerHTML = counter;
+     	} // end doAttack
+     	
+     	function drawGame() {
+	canvasContext.fillStyle = 'grey';
+	canvasContext.fillRect(0, 0, canvas.width, canvas.height);
+	
+	canvasContext.fillStyle = 'black';
+	canvasContext.fillRect(playerX - 1, playerY - 1, playerH + 2, playerW + 2);
+	
+	canvasContext.fillStyle = 'green';
+	canvasContext.fillRect(playerX, playerY, playerH, playerW);
+	
+		canvasContext.fillStyle = 'black';
+	canvasContext.fillRect(enemyX - 1, enemyY - 1, enemyH + 2, enemyW + 2);
+	
+	canvasContext.fillStyle = 'red';
+	canvasContext.fillRect(enemyX, enemyY, enemyH, enemyW);
+        	
+	canvasContext.fillStyle = 'red';
+	canvasContext.fillRect(0, -canvas.height, canvas.width, canvas.height);
+    }
+     	
+  	</script>
+   </body>
+</html>
