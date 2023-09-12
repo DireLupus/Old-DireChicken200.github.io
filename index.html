@@ -1,5 +1,5 @@
 <DOCTYPE! html>
-  
+
 <html>
   <head>
     <title>Monster Hunter Armorset Builder</title>
@@ -8,18 +8,21 @@
     <div>
       <p>
         *Screaming 3.0*
-      </p> 
-    </div> 
+      </p>
+    </div>
     <div>
       <p>
-        *Screaming 3.0*
-      </p> 
-       <a id="next_url" href="google.com" target ="_blank">Link</a>
-    </div> 
+        *Screaming 4.0*
+      </p>
+       <a id="next_url" href="https://google.com" target ="_blank">Link</a>
+    </div>
   </body>
   <script type="text/javascript">
-    var url = "docs.google.com";
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const url = urlParams.get('next_url')
 
     document.getElementById("next_url").href = url;
   </script>
 </html>
+
