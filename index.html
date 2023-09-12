@@ -2,9 +2,11 @@
 
 <html>
   <script type="text/javascript">
-    const en_us = new Map();
+  const en_us = new Map();
+  const not_en_us = new Map();
 
-    en_us.set("test", "https://docs.google.com/document/d/1_O2N7Ns34DysrVJ7ykGuREvqxqu-N7LxqSSl8Q9wwIk/edit")
+  en_us.set("example", "https://docs.google.com/document/d/1_O2N7Ns34DysrVJ7ykGuREvqxqu-N7LxqSSl8Q9wwIk/edit")
+  en_us.set("example", "https://docs.google.com/document/d/1_O2N7Ns34DysrVJ7ykGuREvqxqu-N7LxqSSl8Q9wwIk/edit")
 
   </script>
   <head>
@@ -13,7 +15,7 @@
   <body>
     <div>
       <p>
-        *Screaming 5.0*
+        *Screaming 6.0*
       </p>
     </div>
     <div>
@@ -33,6 +35,9 @@
       if(document.getElementById("lang").value == "en_us")
       {
         window.location.href = en_us.get(doc);
+      } else if (document.getElementById("lang").value == "not_en_us")
+      {
+        window.location.href = not_en_us.get(doc);
       }
     }
   </script>
